@@ -7,6 +7,7 @@ function HomePage() {
       <p>Base del proyecto con tema global</p>
       <p>Base URL: {config.nasa.baseUrl}</p>
       <p>API Key loaded: {config.nasa.apiKey ? "Yes" : "No"}</p>
+      
     </main>
   );
 }
