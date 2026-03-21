@@ -1,15 +1,24 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+.app {
+  min-height: 100vh;
+  padding: var(--space-lg);
+  background-color: var(--bg);
+  color: var(--text);
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #0b1020;
-  color: white;
+.theme-toggle {
+  margin-top: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background-color: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
 }
 
-main {
-  padding: 2rem;
+.theme-toggle:hover {
+  background-color: var(--primary);
+  color: #fff;
+  transform: scale(1.05);
 }
