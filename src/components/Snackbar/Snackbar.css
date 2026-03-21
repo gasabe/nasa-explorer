@@ -1,0 +1,27 @@
+.snackbar {
+  position: fixed;
+  right: var(--space-lg);
+  bottom: var(--space-lg);
+  min-width: 260px;
+  max-width: 380px;
+  padding: 0.9rem 1rem;
+  border-radius: var(--radius);
+  background-color: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  font-size: 0.95rem;
+  z-index: 1100;
+}
+
+.snackbar--info {
+  border-left: 4px solid var(--primary);
+}
+
+.snackbar--success {
+  border-left: 4px solid var(--success);
+}
+
+.snackbar--error {
+  border-left: 4px solid var(--error);
+}
