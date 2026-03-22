@@ -4,6 +4,7 @@
   background: var(--bg);
 }
 
+
 .home-page__hero {
   max-width: var(--container-width);
   margin: 0 auto var(--space-xl);

@@ -1,17 +1,22 @@
 .app {
   min-height: 100vh;
-  padding: var(--space-lg);
-  background-color: var(--bg);
+  background-color: var(--bgg);
   color: var(--text);
 }
 
 .theme-toggle {
+
+  position: absolute;   
+  top: 20px;         
+  right: 20px;       
+   
+  
   margin-top: var(--space-md);
   padding: var(--space-sm) var(--space-md);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  background-color: var(--surface);
-  color: var(--text);
+  background-color: var(--bg-negado);
+  
   box-shadow: var(--shadow);
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
@@ -19,6 +24,6 @@
 
 .theme-toggle:hover {
   background-color: var(--primary);
-  color: #fff;
+  color: var(--text);
   transform: scale(1.05);
 }

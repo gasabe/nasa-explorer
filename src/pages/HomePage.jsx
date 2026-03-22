@@ -2,13 +2,22 @@ import "./HomePage.css";
 import { useFetchApod } from "../hooks/useFetchApod";
 import MediaCard from "../components/MediaCard/MediaCard";
 import Skeleton from "../components/Skeleton/Skeleton";
+import { useTheme } from "../hooks/useTheme";
 
 function HomePage() {
   const { data, loading, error } = useFetchApod();
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <main className="home-page">
       <section className="home-page__hero">
+        <button
+          className="theme-toggle"
+          onClick={toggleTheme}
+          aria-label="Cambiar tema"
+        >
+          {theme === "dark" ? "☀️" : "🌙"}
+        </button>
 
         <div className="home-page__intro">
           <h1 className="home-page__title">NASA Explorer App</h1>
