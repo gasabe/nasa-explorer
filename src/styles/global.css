@@ -33,3 +33,26 @@ img {
   max-width: 100%;
   display: block;
 }
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) var(--surface-soft);
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--surface-soft);
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+  border: 2px solid var(--surface-soft);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}

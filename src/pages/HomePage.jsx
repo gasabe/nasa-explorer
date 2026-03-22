@@ -9,10 +9,13 @@ function HomePage() {
   return (
     <main className="home-page">
       <section className="home-page__hero">
-        <h1 className="home-page__title">NASA Explorer App</h1>
-        <p className="home-page__subtitle">
-          Explorá la imagen astronómica del día
-        </p>
+
+        <div className="home-page__intro">
+          <h1 className="home-page__title">NASA Explorer App</h1>
+          <p className="home-page__subtitle">
+            Explorá la imagen astronómica del día
+          </p>
+        </div>
       </section>
 
       <section className="home-page__content">
