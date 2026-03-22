@@ -3,11 +3,19 @@
 :root {
   --font-family-base: "Inter", system-ui, sans-serif;
 
+  --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 16px;
   --space-lg: 24px;
+  --space-xl: 32px;
 
   --radius: 12px;
+  --radius-lg: 20px;
+  --radius-full: 999px;
+
+  --container-width: 900px;
+  --media-card-height: 420px;
+  --modal-max-width: 1100px;
 
   --bg: #f4f7fb;
   --surface: #ffffff;
@@ -29,8 +37,22 @@
   --error: #dc2626;
   --focus: rgba(49, 91, 255, 0.22);
 
+  --overlay: rgba(15, 23, 42, 0.5);
+  --overlay-strong: rgba(15, 23, 42, 0.78);
+
   --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.06);
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.16);
+
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+
+  --font-size-body: 1rem;
+  --font-size-subtitle: 1.1rem;
+  --font-size-eyebrow: 0.95rem;
+  --font-size-date: 0.95rem;
+  --line-height-body: 1.6;
+  --line-height-relaxed: 1.7;
 }
 
 html[data-theme="dark"] {
@@ -54,6 +76,10 @@ html[data-theme="dark"] {
   --error: #f87171;
   --focus: rgba(79, 124, 255, 0.28);
 
+  --overlay: rgba(0, 0, 0, 0.45);
+  --overlay-strong: rgba(0, 0, 0, 0.75);
+
   --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.18);
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.4);
 }
