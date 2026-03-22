@@ -1,0 +1,31 @@
+.home-page {
+  min-height: 100vh;
+  padding: var(--space-lg);
+  background: var(--color-background);
+}
+
+.home-page__hero {
+  max-width: var(--container-width);
+  margin: 0 auto var(--space-lg);
+}
+
+.home-page__title {
+  margin-bottom: var(--space-xs);
+  color: var(--color-text-primary);
+}
+
+.home-page__subtitle {
+  color: var(--color-text-secondary);
+}
+
+.home-page__content {
+  max-width: var(--container-width);
+  margin: 0 auto;
+}
+
+.home-page__message {
+  padding: var(--space-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
