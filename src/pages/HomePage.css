@@ -2,6 +2,7 @@
   min-height: 100vh;
   padding: var(--space-xl) var(--space-lg);
   background: var(--bg);
+  
 }
 
 
@@ -46,7 +47,9 @@
 }
 
 .home-page__content {
-  max-width: var(--container-width);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0 auto;
 }
 
