@@ -5,13 +5,10 @@ function MediaCard({ title, date, description, mediaUrl, mediaType }) {
 
   return (
     <article className="media-card">
-      <header className="media-card__header">
-        <div className="media-card__badge">🚀</div>
-        <p className="media-card__eyebrow">Astronomy Picture of the Day</p>
-      </header>
-
       <div className="media-card__body">
-        <h2 className="media-card__title">{title}</h2>
+        <header className="media-card__header">
+          <p className="media-card__eyebrow">Astronomy Picture of the Day <img src="https://www.nasa.gov/wp-content/themes/nasa/assets/images/nasa-logo.svg" alt="NASA Logo" /></p>
+        </header>
 
         {!mediaUrl ? (
           <p className="media-card__fallback">Sin contenido disponible</p>
@@ -37,11 +34,15 @@ function MediaCard({ title, date, description, mediaUrl, mediaType }) {
           <p className="media-card__fallback">Formato no soportado</p>
         )}
 
-        <p className="media-card__date">Fecha: {date}</p>
+        <div className="media-card__content">
+          <p className="media-card__date">{date}</p>
 
-        {description && (
-          <p className="media-card__description">{description}</p>
-        )}
+          <h2 className="media-card__title">{title}</h2>
+
+          {description && (
+            <p className="media-card__description">{description}</p>
+          )}
+        </div>
       </div>
     </article>
   );
