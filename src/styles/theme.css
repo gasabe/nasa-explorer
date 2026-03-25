@@ -20,6 +20,7 @@
   --bgg: #fbf4f4;
   --bg-negado: #0a0f1e;
   --bg : var(--bgg) url("https://www.pngkey.com/png/full/42-425480_stars-sky-galaxy-effects-overlay-background-illustration.png");
+  --bg-card : var(--bgg) url("https://w7.pngwing.com/pngs/913/500/png-transparent-blue-blue-star-blue-and-black-galaxy-texture-blue-stars.png");
   --surface: #ffffff;
   --surface-soft: #eef4fb;
   --surface-strong: #e2eaf5;
