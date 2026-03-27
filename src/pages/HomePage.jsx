@@ -3,6 +3,7 @@ import { useFetchApod } from "../hooks/useFetchApod";
 import MediaCard from "../components/MediaCard/MediaCard";
 import Skeleton from "../components/Skeleton/Skeleton";
 import { useTheme } from "../hooks/useTheme";
+import { Link } from "react-router-dom";
 
 function HomePage() {
   const { data, loading, error } = useFetchApod();
@@ -24,6 +25,7 @@ function HomePage() {
           <p className="home-page__subtitle">
             Explorá la imagen astronómica del día
           </p>
+          <Link to="/search">Ir a búsqueda</Link>
         </div>
       </section>
 
