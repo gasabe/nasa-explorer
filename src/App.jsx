@@ -1,10 +1,10 @@
-import HomePage from "./pages/HomePage";
+import AppRouter from "./router/AppRouter";
 
 function App() {
 
   return (
     <main className="app">
-      <HomePage />
+      <AppRouter />
     </main>
   );
 }
