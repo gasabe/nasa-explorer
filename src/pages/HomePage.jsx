@@ -25,7 +25,11 @@ function HomePage() {
           <p className="home-page__subtitle">
             Explorá la imagen astronómica del día
           </p>
-          <Link to="/search">Ir a búsqueda</Link>
+          <div>
+            <Link to="/search" className="home-page__cta">
+              Ir a búsqueda NASA →
+            </Link>
+          </div>
         </div>
       </section>
 

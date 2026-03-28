@@ -3,10 +3,18 @@
   margin: 0 auto;
   padding: var(--space-lg);
 }
+.search-page_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-md);
+  width: 100%;
+  margin-bottom: var(--space-lg);
+}
 
 .search-page__title {
-  margin-bottom: var(--space-md);
-  color: var(--text);
+  margin: 0;
+  flex: 1;
 }
 
 .search-page__form {
