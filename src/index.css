@@ -27,3 +27,24 @@
   color: var(--text);
   transform: scale(1.05);
 }
+
+.theme-button {
+  flex-shrink: 0;
+  align-self: flex-start;
+
+  margin-top: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, #7c3aed, #9333ea);
+  color: #ffffff;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+}
+
+.theme-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(124, 58, 237, 0.35);
+  opacity: 0.95;
+}

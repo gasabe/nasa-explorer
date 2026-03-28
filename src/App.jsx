@@ -1,10 +1,11 @@
-import HomePage from "./pages/HomePage";
+import AppRouter from "./router/AppRouter";
+import { useTheme } from "./hooks/useTheme";
 
 function App() {
-
+  useTheme();
   return (
     <main className="app">
-      <HomePage />
+      <AppRouter />
     </main>
   );
 }

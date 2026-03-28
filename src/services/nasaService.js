@@ -54,3 +54,16 @@ export async function getApod() {
     throw error;
   }
 }
+
+export async function searchNasaContent(query) {
+  const response = await fetch(
+    `${config.nasa.searchUrl}/search?q=${encodeURIComponent(query)}`
+  );
+
+  if (!response.ok) {
+    throw new Error("Could not fetch NASA content")
+  }
+
+  const data = await response.json()
+  return data
+}
