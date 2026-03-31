@@ -1,13 +1,29 @@
 import "./HomePage.css";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useFetchApod } from "../hooks/useFetchApod";
+import { useTheme } from "../hooks/useTheme";
 import MediaCard from "../components/MediaCard/MediaCard";
 import Skeleton from "../components/Skeleton/Skeleton";
-import { useTheme } from "../hooks/useTheme";
-import { Link } from "react-router-dom";
+import SearchForm from "../components/SearchForm/SearchForm";
 
 function HomePage() {
   const { data, loading, error } = useFetchApod();
   const { theme, toggleTheme } = useTheme();
+  const [searchValue, setSearchValue] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearchChange = (event) => {
+    setSearchValue(event.target.value);
+  };
+
+  const handleSearchSubmit = () => {
+    const trimmedValue = searchValue.trim();
+
+    if (!trimmedValue) return;
+
+    navigate(`/search?q=${encodeURIComponent(trimmedValue)}`);
+  };
 
   return (
     <main className="home-page">
@@ -25,11 +41,13 @@ function HomePage() {
           <p className="home-page__subtitle">
             Explorá la imagen astronómica del día
           </p>
-          <div>
-            <Link to="/search" className="home-page__cta">
-              Ir a búsqueda NASA →
-            </Link>
-          </div>
+
+          <SearchForm
+            value={searchValue}
+            onChange={handleSearchChange}
+            onSubmit={handleSearchSubmit}
+            buttonText="Buscar"
+          />
         </div>
       </section>
 
