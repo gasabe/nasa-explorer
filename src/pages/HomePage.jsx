@@ -35,7 +35,7 @@ function HomePage() {
         >
           {theme === "dark" ? "☀️" : "🌙"}
         </button>
-
+</section>
         <div className="home-page__intro">
           <h1 className="home-page__title">NASA Explorer App</h1>
           <p className="home-page__subtitle">
@@ -49,7 +49,7 @@ function HomePage() {
             buttonText="Buscar"
           />
         </div>
-      </section>
+    
 
       <section className="home-page__content">
         {loading && <Skeleton />}
