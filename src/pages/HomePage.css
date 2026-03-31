@@ -27,7 +27,7 @@
   backdrop-filter: blur(8px);
 }
 
-.home-page__hero-header > div {
+.home-page__hero-header {
   flex: 1;
   min-width: 0;
 }

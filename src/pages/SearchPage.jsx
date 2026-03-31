@@ -1,86 +1,70 @@
-import { useState } from "react";
-import Input from "../components/Input/Input";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Snackbar from "../components/Snackbar/Snackbar";
-import { searchNasaContent } from "../services/nasaService";
 import MediaCard from "../components/MediaCard/MediaCard";
+import Loading from "../components/Loading/Loading";
+import SearchForm from "../components/SearchForm/SearchForm";
+import { useNasaSearch } from "../hooks/useNasaSearch";
 import "./SearchPage.css";
-import { useNavigate } from "react-router-dom";
+import Skeleton from "../components/Skeleton/Skeleton";
 
 function SearchPage() {
-  const [query, setQuery] = useState("");
-  const [results, setResults] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [hasSearched, setHasSearched] = useState(false);
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const queryFromUrl = searchParams.get("q") || "";
+
+  const {
+    query,
+    results,
+    loading,
+    error,
+    hasSearched,
+    handleChange,
+  } = useNasaSearch(queryFromUrl);
 
   const handleGoBack = () => {
     navigate(-1);
   };
 
-  const handleSearch = async () => {
-    if (!query.trim()) return;
+  const handleSubmit = () => {
+    const trimmedValue = query.trim();
 
-    try {
-      setLoading(true);
-      setError("");
+    if (!trimmedValue) return;
 
-      const data = await searchNasaContent(query);
-      setResults(data.collection?.items || []);
-      setHasSearched(true);
-    } catch (error) {
-      setError("No se pudieron obtener resultados", error);
-      setResults([]);
-      setHasSearched(true);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleChange = (event) => {
-    setQuery(event.target.value);
-    setHasSearched(false);
+    setSearchParams({ q: trimmedValue });
   };
 
   return (
     <main className="search-page">
+      <div className="search-page__header">
+        <h1 className="search-page__title">Buscar imágenes NASA</h1>
 
-      <div className="search-page_header">
-      <h1 className="search-page__title">Buscar imágenes NASA</h1>
-
-      <button
-        type="button"
-        className="theme-button"
-        onClick={handleGoBack}
-      >
-        ← Volver
-      </button>
-</div>
-      <div className="search-page__form">
-        <Input
-          id="search"
-          name="search"
-          value={query}
-          onChange={handleChange}
-          placeholder="Ej: moon, mars, apollo"
-        />
-      </div>
-
-      <div className="search-page__form">
         <button
-          className="search-page__button"
           type="button"
-          onClick={handleSearch}
-          disabled={loading || !query.trim() || hasSearched}
+          className="theme-button"
+          onClick={handleGoBack}
         >
-          {loading ? "Buscando..." : "Buscar"}
+          ← Volver
         </button>
       </div>
 
+      <SearchForm
+        value={query}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+        loading={loading}
+      />
+
+      {loading && <Loading message="Buscando contenido de NASA..." />}
+
       <Snackbar message={error} type="error" isVisible={Boolean(error)} />
+
+      {!loading && hasSearched && results.length === 0 && !error && (
+        <p className="search-page__empty">No se encontraron resultados.</p>
+      )}
 
       {results.length > 0 && (
         <section className="search-page__results">
+
           {results.map((item) => {
             const data = item.data?.[0];
 
@@ -88,7 +72,7 @@ function SearchPage() {
               <MediaCard
                 key={data?.nasa_id}
                 title={data?.title || "Sin título"}
-                date={data?.date_created || ""}
+                subtitle={data?.date_created || ""}
                 description={data?.description || "Sin descripción"}
                 mediaUrl={item.links?.[0]?.href || ""}
                 mediaType={data?.media_type || ""}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { searchNasaContent } from "../services/nasaService";
 
 export function useNasaSearch(initialQuery = "") {
@@ -11,6 +11,7 @@ export function useNasaSearch(initialQuery = "") {
   const handleChange = (event) => {
     setQuery(event.target.value);
     setError("");
+    setHasSearched(false);
   };
 
   const executeSearch = async (searchValue = query) => {
@@ -38,9 +39,20 @@ export function useNasaSearch(initialQuery = "") {
     }
   };
 
+  useEffect(() => {
+    setQuery(initialQuery);
+
+    if (initialQuery.trim()) {
+      executeSearch(initialQuery);
+    } else {
+      setResults([]);
+      setHasSearched(false);
+      setError("");
+    }
+  }, [initialQuery]);
+
   return {
     query,
-    setQuery,
     results,
     loading,
     error,
