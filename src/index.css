@@ -5,22 +5,26 @@
 }
 
 .theme-toggle {
-
-  position: absolute;   
-  top: 20px;         
-  right: 20px;       
-   
-  
+  position: absolute;
+  top: 20px;
+  right: 20px;
   margin-top: var(--space-md);
   padding: var(--space-sm) var(--space-md);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background-color: var(--bg-negado);
-  
   box-shadow: var(--shadow);
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
 }
+
+.home-page__hero-header .theme-toggle {
+  position: relative;
+  top: 0;
+  right: 0;
+  margin: 0;
+}
+
 
 .theme-toggle:hover {
   background-color: var(--primary);
