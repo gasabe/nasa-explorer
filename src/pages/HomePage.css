@@ -9,8 +9,27 @@
   margin: 0 auto var(--space-xl);
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
   gap: var(--space-md);
+}
+
+.home-page__hero-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: rgba(8, 20, 45, 0.01);
+  border: 1px solid rgba(112, 10, 104, 0.514);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.23);
+  backdrop-filter: blur(8px);
+}
+
+.home-page__hero-header > div {
+  flex: 1;
+  min-width: 0;
 }
 
 .home-page__intro {

@@ -28,20 +28,24 @@ function HomePage() {
   return (
     <main className="home-page">
       <section className="home-page__hero">
-        <button
-          className="theme-toggle"
-          onClick={toggleTheme}
-          aria-label="Cambiar tema"
-        >
-          {theme === "dark" ? "☀️" : "🌙"}
-        </button>
-</section>
-        <div className="home-page__intro">
-          <h1 className="home-page__title">NASA Explorer App</h1>
-          <p className="home-page__subtitle">
-            Explorá la imagen astronómica del día
-          </p>
+        <div className="home-page__hero-header">
+          <div>
+            <h1 className="home-page__title">NASA Explorer App</h1>
+            <p className="home-page__subtitle">
+              Explorá la imagen astronómica del día
+            </p>
+          </div>
 
+          <button
+            className="theme-toggle"
+            onClick={toggleTheme}
+            aria-label="Cambiar tema"
+          >
+            {theme === "dark" ? "☀️" : "🌙"}
+          </button>
+        </div>
+
+        <div className="home-page__intro">
           <SearchForm
             value={searchValue}
             onChange={handleSearchChange}
@@ -49,7 +53,7 @@ function HomePage() {
             buttonText="Buscar"
           />
         </div>
-    
+      </section>
 
       <section className="home-page__content">
         {loading && <Skeleton />}
