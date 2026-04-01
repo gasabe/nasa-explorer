@@ -1,28 +1,42 @@
 import "./HomePage.css";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useFetchApod } from "../hooks/useFetchApod";
-import { useTheme } from "../hooks/useTheme";
-import MediaCard from "../components/MediaCard/MediaCard";
-import Skeleton from "../components/Skeleton/Skeleton";
-import SearchForm from "../components/SearchForm/SearchForm";
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { useFetchApod } from "../hooks/useFetchApod"
+import { useTheme } from "../hooks/useTheme"
+import { useNasaSearch } from "../hooks/useNasaSearch"
+import MediaCard from "../components/MediaCard/MediaCard"
+import Skeleton from "../components/Skeleton/Skeleton"
+import SearchForm from "../components/SearchForm/SearchForm"
 
 function HomePage() {
-  const { data, loading, error } = useFetchApod();
+  const { data, loading: apodLoading, error: apodError } = useFetchApod();
   const { theme, toggleTheme } = useTheme();
-  const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
 
-  const handleSearchChange = (event) => {
-    setSearchValue(event.target.value);
-  };
+  const {
+    query, 
+    results, 
+    loading: searchLoading, 
+    error: searchError, 
+    hasSearched, // true después del primer fetch
+    handleChange, // cambia el query y dispara debounce
+  } = useNasaSearch();
+
+  const [showDropdown, setShowDropdown] = useState(false); // visibilidad 
 
   const handleSearchSubmit = () => {
-    const trimmedValue = searchValue.trim();
+    const trimmedValue = query.trim();
 
-    if (!trimmedValue) return;
+    if (!trimmedValue) return; // no navegamos con vacio
 
     navigate(`/search?q=${encodeURIComponent(trimmedValue)}`);
+    setShowDropdown(false); 
+  };
+
+  const handleResultClick = (result) => {
+    const searchQuery = result.data?.[0]?.title || query
+    navigate(`/search?q=${encodeURIComponent(searchQuery)}`)
+    setShowDropdown(false);
   };
 
   return (
@@ -46,25 +60,70 @@ function HomePage() {
         </div>
 
         <div className="home-page__intro">
-          <SearchForm
-            value={searchValue}
-            onChange={handleSearchChange}
-            onSubmit={handleSearchSubmit}
-            buttonText="Buscar"
-          />
+          <div className="search-container">
+            <SearchForm
+              value={query} 
+              onChange={(e) => {
+                handleChange(e); // actualiza query + debounce
+                setShowDropdown(true); // show dropdown al escribir
+              }}
+              onSubmit={handleSearchSubmit} 
+              loading={searchLoading} 
+              buttonText="Buscar"
+              placeholder="Ej: moon, mars, apollo"
+            />
+
+            {showDropdown && hasSearched && results.length > 0 && (
+              <ul className="search-dropdown">
+                {results.slice(0, 5).map((item) => {
+                  const data = item.data?.[0];
+                  return (
+                    <li
+                      key={data?.nasa_id}
+                      className="search-dropdown__item"
+                      onClick={() => handleResultClick(item)} 
+                    >
+                      <img
+                        src={item.links?.[0]?.href}
+                        alt={data?.title}
+                        className="search-dropdown__image"
+                      />
+                      <div className="search-dropdown__content">
+                        <h4>{data?.title || "Sin título"}</h4>
+                        <p>{data?.date_created || ""}</p>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+
+            {showDropdown &&
+              hasSearched &&
+              results.length === 0 &&
+              !searchLoading && (
+                <p className="search-dropdown__no-results">
+                  No se encontraron resultados.
+                </p>
+              )}
+
+            {showDropdown && searchError && (
+              <p className="search-dropdown__error">{searchError}</p>
+            )}
+          </div>
         </div>
       </section>
 
       <section className="home-page__content">
-        {loading && <Skeleton />}
+        {apodLoading && <Skeleton />}
 
-        {!loading && error && (
+        {!apodLoading && apodError && (
           <div className="home-page__message">
-            <p>{error}</p>
+            <p>{apodError}</p>
           </div>
         )}
 
-        {!loading && !error && data && (
+        {!apodLoading && !apodError && data && (
           <MediaCard
             title={data.title}
             subtitle={data.date}
