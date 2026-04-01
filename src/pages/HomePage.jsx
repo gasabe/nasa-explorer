@@ -39,6 +39,14 @@ function HomePage() {
     setShowDropdown(false);
   };
 
+  const handleApodClick = () => {
+    if (!data) return;
+
+    navigate("/detail/apod", {
+      state: { apodData: data },
+    });
+  };
+
   return (
     <main className="home-page">
       <section className="home-page__hero">
@@ -125,6 +133,8 @@ function HomePage() {
 
         {!apodLoading && !apodError && data && (
           <MediaCard
+            isClickable
+            onClick={handleApodClick}
             title={data.title}
             subtitle={data.date}
             description={data.explanation}

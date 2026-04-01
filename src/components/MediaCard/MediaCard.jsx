@@ -1,10 +1,16 @@
 import "./MediaCard.css";
 
-function MediaCard({ title, date, description, mediaUrl, mediaType }) {
+function MediaCard({ title, date, description, mediaUrl, mediaType, isClickable = false, onClick }) {
   const isMp4 = mediaUrl?.toLowerCase().includes(".mp4");
 
   return (
-    <article className="media-card">
+    <article
+      className={`media-card ${isClickable ? "media-card--clickable" : ""}`}
+      onClick={onClick}
+      role={isClickable ? "button" : undefined}
+      tabIndex={isClickable ? 0 : undefined}
+      onKeyDown={isClickable ? (e) => { if (e.key === "Enter" || e.key === " ") onClick?.(); } : undefined}
+    >
       <div className="media-card__body">
         <header className="media-card__header">
           <p className="media-card__eyebrow">Astronomy Picture of the Day <img src="https://www.nasa.gov/wp-content/themes/nasa/assets/images/nasa-logo.svg" alt="NASA Logo" /></p>

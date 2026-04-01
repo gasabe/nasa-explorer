@@ -33,6 +33,17 @@ function SearchPage() {
     setSearchParams({ q: trimmedValue });
   };
 
+  const handleItemClick = (item) => {
+    const data = item.data?.[0];
+    const nasaId = data?.nasa_id;
+
+    if (!nasaId) return;
+
+    navigate(`/detail/${nasaId}`, {
+      state: { item },
+    });
+  };
+
   return (
     <main className="search-page">
       <div className="search-page__header">
@@ -76,6 +87,8 @@ function SearchPage() {
                 description={data?.description || "Sin descripción"}
                 mediaUrl={item.links?.[0]?.href || ""}
                 mediaType={data?.media_type || ""}
+                isClickable
+                onClick={() => handleItemClick(item)}
               />
             );
           })}
