@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { searchNasaContent } from "../services/nasaService";
 
 export function useNasaSearch(initialQuery = "") {
@@ -14,7 +14,7 @@ export function useNasaSearch(initialQuery = "") {
     setHasSearched(false);
   };
 
-  const executeSearch = async (searchValue = query) => {
+  const executeSearch = useCallback(async (searchValue) => {
     const trimmedValue = searchValue.trim();
 
     if (!trimmedValue) {
@@ -37,7 +37,7 @@ export function useNasaSearch(initialQuery = "") {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     setQuery(initialQuery);
@@ -49,7 +49,18 @@ export function useNasaSearch(initialQuery = "") {
       setHasSearched(false);
       setError("");
     }
-  }, [initialQuery]);
+  }, [initialQuery, executeSearch]);
+
+  // Búsqueda automática con debounce mientras se escribe
+  useEffect(() => {
+    if (query && query !== initialQuery) {
+      const timeoutId = setTimeout(() => {
+        executeSearch(query);
+      }, 500); // 500ms debounce
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, [query, initialQuery, executeSearch]);
 
   return {
     query,
